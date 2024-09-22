@@ -1,7 +1,7 @@
-FROM node:14.17.0-alpine
+FROM node:16
 WORKDIR /app
-ADD package*.json ./
-RUN npm install
-ADD index.js ./
-EXPOSE 5050
-CMD ["node", "index.js"]
+COPY package.json .
+COPY package-lock.json .
+RUN npm ci
+COPY app.js .
+CMD ["app.js"]
